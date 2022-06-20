@@ -1,1 +1,94 @@
-require('./bootstrap');
+import {createApp} from 'vue';
+import PrimeVue from 'primevue/config';
+import {createRouter, createWebHashHistory} from 'vue-router';
+import TreeTable from 'primevue/treetable';
+import Vuex from 'vuex'
+import Store from './store/store'
+
+
+// import VueAxios from 'vue-axios'
+import axios from 'axios'
+
+import CommentIndex from './components/comment/Index'
+
+
+const app = createApp(CommentIndex);
+
+
+const routes = [
+    // {path: '/', name: 'platform.index', component: CommentIndex},
+//     {path: '/platform', name: 'platform.index', component: PlatformIndex},
+//     {path: '/platform/:id', name: 'platform.edit', component: PlatformEdit},
+//     {path: '/os', name: 'os.index', component: OsIndex},
+//     {path: '/os/:id', name: 'os.edit', component: OsEdit},
+//     {path: '/program', name: 'program.index', component: ProgramIndex},
+//     {path: '/program/:id', name: 'program.hub', component: ProgramHub},
+//     {path: '/category', name: 'category.index', component: CategoryIndex},
+//     {path: '/category/:id', name: 'category.edit', component: CategoryEdit},
+//     {path: '/platform-group', name: 'platform-group.index', component: PlatformGroupIndex},
+//     {path: '/platform-group/:id', name: 'platform-group.edit', component: PlatformGroupEdit},
+]
+
+export const router = createRouter({
+    history: createWebHashHistory(),
+    routes: routes,
+});
+
+
+
+import TabView from 'primevue/tabview';
+import TabPanel from 'primevue/tabpanel';
+import InputText from 'primevue/inputtext';
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
+import ColumnGroup from 'primevue/columngroup';
+import Button from 'primevue/button';
+import ProgressSpinner from 'primevue/progressspinner';
+import ProgressBar from 'primevue/progressbar';
+import Menubar from 'primevue/menubar';
+import Dropdown from 'primevue/dropdown';
+import Toast from 'primevue/toast';
+import ToastService from 'primevue/toastservice';
+import Toolbar from 'primevue/toolbar';
+import Dialog from 'primevue/dialog';
+import InputNumber from 'primevue/inputnumber';
+import Card from 'primevue/card';
+import Menu from 'primevue/menu';
+import Textarea from 'primevue/textarea';
+import Checkbox from 'primevue/checkbox';
+import InputSwitch from 'primevue/inputswitch';
+
+app.use(ToastService);
+app.use(router);
+app.use(PrimeVue);
+app.use(Vuex);
+app.use(Store);
+// app.use(VueAxios, axios)
+
+
+
+app.component('TreeTable', TreeTable);
+app.component('Column', Column);
+
+app.component('TabView', TabView);
+app.component('TabPanel', TabPanel);
+app.component('InputText', InputText);
+app.component('DataTable', DataTable);
+app.component('Column', Column);
+app.component('ColumnGroup', ColumnGroup);
+app.component('Button', Button);
+app.component('ProgressSpinner', ProgressSpinner);
+app.component('ProgressBar', ProgressBar);
+app.component('Menubar', Menubar);
+app.component('Dropdown', Dropdown);
+app.component('Toast', Toast);
+app.component('Toolbar', Toolbar);
+app.component('Dialog', Dialog);
+app.component('InputNumber', InputNumber);
+app.component('Card', Card);
+app.component('Menu', Menu);
+app.component('Textarea', Textarea);
+app.component('Checkbox', Checkbox);
+app.component('InputSwitch', InputSwitch);
+
+app.mount('#app');

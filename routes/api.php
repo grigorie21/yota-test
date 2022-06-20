@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\CommentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['prefix' => 'comment', 'as' => 'comment.'], function () {
+    Route::get('/', [CommentController::class, 'getTopLevel'])->name('index');
+    Route::get('{id}', [CommentController::class, 'getWithNested'])->name('get');
+    Route::put('{id}', [CommentController::class, 'put'])->name('put');
+    Route::post('/', [CommentController::class, 'post'])->name('post');
+    Route::delete('{id}', [CommentController::class, 'del'])->name('delete');
 });
+
