@@ -21,7 +21,7 @@ class CommentController extends Controller
     public function index(): ResourceCollection
     {
         $model = Comment::with('nested')
-            ->orderBy('created_at', 'ASC')
+            ->orderBy('created_at', 'DESC')
             ->where('parent_id', null)
             ->get();
 

@@ -23,6 +23,6 @@ class Comment extends Model
     }
 
     public function nested(): HasMany {
-        return $this->hasMany(Comment::class, 'parent_id', 'id');
+        return $this->hasMany(Comment::class, 'parent_id', 'id')->orderBy('created_at', 'DESC');
     }
 }

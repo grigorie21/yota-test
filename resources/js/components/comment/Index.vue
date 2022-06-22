@@ -1,7 +1,6 @@
 <template>
     <div class="card">
-        <h5>Basic</h5>
-        <Button @click="edit()" icon="pi pi-plus" iconPos="right" class="p-button-sm p-button-success" />
+        <Button @click="addNew()" icon="pi pi-plus" iconPos="right" class="p-button-sm p-button-success" />
         <TreeTable :value="modelTree" editMode="cell" class="editable-cells-table" :expandedKeys="expandedKeys">
             <Column field="id" header="Id" :expander="true"></Column>
             <Column field="text" header="text"></Column>
@@ -71,13 +70,12 @@ export default {
                 }
             });
         },
-        addNew(v) {
+        addNew() {
             this.nodeSet(null);
-
             this['commentIndex/fetchPost']({
                 url: this.url['model'],
                 body: {
-                    parent_id: v.node.data.id
+                    parent_id: null
                 }
             });
         },
