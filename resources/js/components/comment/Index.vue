@@ -27,29 +27,23 @@ export default {
             url: {
                 model: '/api/comment',
             },
-            nodes: null,
-            columns: null,
             expandedKeys: {}
         };
     },
     computed: {
         ...mapGetters('commentIndex', ['model', 'modelTree', 'loading', 'node']),
     },
+    watch: {
+        modelTree (newVal) {
+            if (this.node){
+                let topLevel = /(^[^\-]+)(-?)/.exec(this.node.key)[1];
+                let topBranch = this.modelTree.find(v => v.key == topLevel);
+                this.expandNode(topBranch);
+            }
+        },
+    },
     mounted() {
         this['commentIndex/fetchIndex']({url: this.url['model']});
-
-        this.nodes = this.modelTree.data;
-
-        if (this.node){
-            this.expandNode(this.node);
-        }
-
-        this.columns = [
-            {field: 'id', header: 'id', expander: true},
-            {field: 'text', header: 'text'},
-            {field: 'created_at', header: 'created_at'},
-            {field: 'updated_at', header: 'updated_at'}
-        ];
     },
     methods: {
         ...mapMutations('commentIndex', ['modelSet', 'modelTreeSet', 'loadingSet', 'nodeSet']),
