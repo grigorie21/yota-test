@@ -23,13 +23,5 @@ class DatabaseSeeder extends Seeder
                 ]);
             });
         });
-
-//        Comment::factory(1)->create()->each(function ($category) {
-//            Comment::factory(2)->create([
-//                'parent_id' => $category->id,
-//            ]);
-//        });
-
-//        Comment::factory(10)->create();
     }
 }
