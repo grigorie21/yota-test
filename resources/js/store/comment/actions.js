@@ -1,16 +1,25 @@
+import {router} from "../../app.js"
+
 const actions = {
-    fetchGet({commit, state}, payload) {
+    fetchIndex({commit, state}, payload) {
         commit('loadingSet', state.loading++);
 
-        return fetch( payload.url, {
+        return fetch(payload.url, {
             method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
         }).then((response) => {
-            response.json().then((r) =>
-            {
+            response.json().then((r) => {
+                commit('modelSet', r);
+                commit('modelTreeSet', r);
+                commit('loadingSet', state.loading--);
+            });
+        });
+    },
+    fetchGet({commit, state}, payload) {
+        commit('loadingSet', state.loading++);
+        return fetch(payload.url, {
+            method: 'GET',
+        }).then((response) => {
+            response.json().then((r) => {
                 commit('modelSet', r);
                 commit('loadingSet', state.loading--);
             });
@@ -19,31 +28,39 @@ const actions = {
     fetchPut({commit, state}, payload) {
         return fetch(payload.url, {
             method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(),
+            headers: state.headers,
+            body: JSON.stringify(payload.body),
+        }).then((response) => {
+            response.json().then((r) => {
+                if (r.success) {
+                    // router.push({name: 'comment.edit', params: {id: r.data.id}});
+                }
+            });
         });
     },
     fetchPost({commit, state}, payload) {
         return fetch(payload.url, {
             method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload.variable),
+            headers: state.headers,
+            body: JSON.stringify(payload.body),
+        }).then((response) => {
+            response.json().then((r) => {
+                if (r.success) {
+                    router.push({name: 'comment.edit', params: {id: r.data.id}});
+                }
+            });
         });
     },
-    fetchDel({commit, state}, payload) {
-        return fetch(payload.url, {
+    fetchDel({dispatch, commit, state}, payload) {
+        return fetch(payload.url + '/' + payload.id, {
             method: 'DELETE',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload.variable),
+            headers: state.headers,
+        }).then((response) => {
+            response.json().then((r) => {
+                if (r.data.success) {
+                    dispatch('fetchIndex', {url: payload.url});
+                }
+            });
         });
     },
 };

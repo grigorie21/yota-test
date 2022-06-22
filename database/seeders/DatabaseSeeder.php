@@ -15,9 +15,21 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Comment::factory(10)->create()->each(function ($category) {
-            Comment::factory(2)->create([
+            Comment::factory(5)->create([
                 'parent_id' => $category->id,
-            ]);
+            ])->each(function ($category) {
+                Comment::factory(2)->create([
+                    'parent_id' => $category->id,
+                ]);
+            });
         });
+
+//        Comment::factory(1)->create()->each(function ($category) {
+//            Comment::factory(2)->create([
+//                'parent_id' => $category->id,
+//            ]);
+//        });
+
+//        Comment::factory(10)->create();
     }
 }

@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use JsonSerializable;
 
-class CommentWithoutNestedCollection extends ResourceCollection
+class CommentCollection extends ResourceCollection
 {
-    public $collects = CommentWithoutNestedResource::class;
+    public $collects = CommentWithNestedResource::class;
 
     /**
      * Transform the resource collection into an array.
@@ -19,17 +19,8 @@ class CommentWithoutNestedCollection extends ResourceCollection
      */
     public function toArray($request): array
     {
-        return ['data' => $this->collection];
-    }
-
-    /**
-     * Get additional data that should be returned with the resource array.
-     *
-     * @param Request $request
-     * @return array
-     */
-    public function with($request): array
-    {
-        return ['success' => true];
+        return [
+            'data' => $this->collection,
+        ];
     }
 }

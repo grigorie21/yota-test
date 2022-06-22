@@ -34,4 +34,15 @@ class CommentWithoutNestedResource extends JsonResource
     {
         $response->setStatusCode(200);
     }
+
+    /**
+     * Get additional data that should be returned with the resource array.
+     *
+     * @param Request $request
+     * @return array
+     */
+    public function with($request): array
+    {
+        return ['success' => true];
+    }
 }

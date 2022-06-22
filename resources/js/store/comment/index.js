@@ -7,8 +7,12 @@ export default {
     state() {
         return {
             model: {
+                data:[],
+            },
+            modelTree: {
                 data: [],
             },
+            node: null,
             loading: 0,
             headers: {
                 'Accept': 'application/json',

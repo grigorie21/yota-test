@@ -16,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'comment', 'as' => 'comment.'], function () {
-    Route::get('/', [CommentController::class, 'getTopLevel'])->name('index');
-    Route::get('{id}', [CommentController::class, 'getWithNested'])->name('get');
+    Route::get('/', [CommentController::class, 'index'])->name('index');
+    Route::get('{id}', [CommentController::class, 'get'])->name('get');
     Route::put('{id}', [CommentController::class, 'put'])->name('put');
     Route::post('/', [CommentController::class, 'post'])->name('post');
     Route::delete('{id}', [CommentController::class, 'del'])->name('delete');

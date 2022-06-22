@@ -5,36 +5,21 @@ import TreeTable from 'primevue/treetable';
 import Vuex from 'vuex'
 import Store from './store/store'
 
-
-// import VueAxios from 'vue-axios'
-import axios from 'axios'
-
+import RootIndex from './components/Index'
 import CommentIndex from './components/comment/Index'
+import CommentEdit from './components/comment/Edit'
 
-
-const app = createApp(CommentIndex);
-
+const app = createApp(RootIndex);
 
 const routes = [
-    // {path: '/', name: 'platform.index', component: CommentIndex},
-//     {path: '/platform', name: 'platform.index', component: PlatformIndex},
-//     {path: '/platform/:id', name: 'platform.edit', component: PlatformEdit},
-//     {path: '/os', name: 'os.index', component: OsIndex},
-//     {path: '/os/:id', name: 'os.edit', component: OsEdit},
-//     {path: '/program', name: 'program.index', component: ProgramIndex},
-//     {path: '/program/:id', name: 'program.hub', component: ProgramHub},
-//     {path: '/category', name: 'category.index', component: CategoryIndex},
-//     {path: '/category/:id', name: 'category.edit', component: CategoryEdit},
-//     {path: '/platform-group', name: 'platform-group.index', component: PlatformGroupIndex},
-//     {path: '/platform-group/:id', name: 'platform-group.edit', component: PlatformGroupEdit},
+    {path: '/', name: 'comment.index', component: CommentIndex},
+    {path: '/:id', name: 'comment.edit', component: CommentEdit},
 ]
 
 export const router = createRouter({
     history: createWebHashHistory(),
     routes: routes,
 });
-
-
 
 import TabView from 'primevue/tabview';
 import TabPanel from 'primevue/tabpanel';
@@ -63,13 +48,9 @@ app.use(router);
 app.use(PrimeVue);
 app.use(Vuex);
 app.use(Store);
-// app.use(VueAxios, axios)
-
-
 
 app.component('TreeTable', TreeTable);
 app.component('Column', Column);
-
 app.component('TabView', TabView);
 app.component('TabPanel', TabPanel);
 app.component('InputText', InputText);
