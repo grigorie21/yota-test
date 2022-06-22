@@ -33,7 +33,7 @@ const actions = {
         }).then((response) => {
             response.json().then((r) => {
                 if (r.success) {
-                    // router.push({name: 'comment.edit', params: {id: r.data.id}});
+                    //todo добавить вывод успешного оповещеня
                 }
             });
         });

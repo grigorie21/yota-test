@@ -22,9 +22,6 @@ export default {
         ...mapGetters('commentIndex', ['model', 'modelTree', 'loading', 'node']),
     },
     mounted() {
-
-        console.log(this.$router.currentRoute.value.params.id);
-
         if (this.$router.currentRoute.value.params.id !== 'new') {
             this['commentIndex/fetchGet']({url: this.url['model'] + '/' + this.$router.currentRoute.value.params.id})
         }
@@ -37,24 +34,10 @@ export default {
             'commentIndex/fetchPut',
             'commentIndex/fetchDel',
         ]),
-
-
         add() {
-            // сделать запрос в БД
-            this['commentIndex/fetchPost']({url: this.url['model'], body: {value: this.value}})
-                .then((response) => {
-                    response.json().then((r) => {
-                        // commit('modelSet', r);
-                        // commit('loadingSet', state.loading--);
-                        // console.log('loadingSet', state.loading);
-                        // console.log('modelSet', r);
-                    });
-                });
-            // если ответ успешно  то
-
+            this['commentIndex/fetchPost']({url: this.url['model'], body: {value: this.value}});
         },
         edit() {
-            console.log(this.$router.currentRoute.value.params.id);
             this['commentIndex/fetchPut']({
                 url: this.url['model'] + '/' + this.$router.currentRoute.value.params.id,
                 body: {text: this.model.data.text}
@@ -63,19 +46,6 @@ export default {
         back() {
             this.$router.push({name: 'comment.index'});
         },
-
-
-        // edit(id) {
-        //     // if (id == 'new'){
-        //     this['programCommon/tabActiveSet'](0);
-        //     // }
-        //
-        //     this['programCommon/pageNameSet']('program_edit');
-        //     this.$router.push({name: 'program.hub', params: {id: id}});
-        // },
-        // tree(v) {
-        //
-        // }
     }
 }
 </script>

@@ -1,5 +1,4 @@
 <template>
-    {{expandedKeys}}
     <div class="card">
         <h5>Basic</h5>
         <Button @click="edit()" icon="pi pi-plus" iconPos="right" class="p-button-sm p-button-success" />
@@ -16,11 +15,6 @@
                 </template>
             </Column>
         </TreeTable>
-        <!--        <TreeTable :value="nodes">-->
-        <!--            <Column field="name" header="Name" :expander="true"></Column>-->
-        <!--            <Column field="size" header="Size"></Column>-->
-        <!--            <Column field="type" header="Type"></Column>-->
-        <!--        </TreeTable>-->
     </div>
 </template>
 
@@ -48,14 +42,9 @@ export default {
         this.nodes = this.modelTree.data;
 
         if (this.node){
-            console.log('node', this.node);
             this.expandNode(this.node);
-            console.log('expandnodekeys', this.expandedKeys);
-
         }
 
-
-        console.log(222, this.nodes);
         this.columns = [
             {field: 'id', header: 'id', expander: true},
             {field: 'text', header: 'text'},
@@ -72,29 +61,8 @@ export default {
             'commentIndex/fetchPut',
             'commentIndex/fetchDel',
         ]),
-
-        // edit(id) {
-        //     // if (id == 'new'){
-        //     this['programCommon/tabActiveSet'](0);
-        //     // }
-        //
-        //     this['programCommon/pageNameSet']('program_edit');
-        //     this.$router.push({name: 'program.hub', params: {id: id}});
-        // },
-        // add(v){
-        //     console.log(v);
-        //     console.log(v.node.key);
-        //     console.log(v.node.data);
-        //
-        // },
-
         add(v) {
-            // this.$router.push({name: 'comment.index'});
-
-            console.log(34, v);
             this.nodeSet(v.node);
-            console.log(345, this.node);
-
 
             this['commentIndex/fetchPost']({
                 url: this.url['model'],
@@ -102,9 +70,6 @@ export default {
                     parent_id: v.node.data.id
                 }
             });
-
-
-            // this.$router.push({name: 'comment.edit', params: {id: 'new'}});
         },
         addNew(v) {
             this.nodeSet(null);
@@ -115,14 +80,10 @@ export default {
                     parent_id: v.node.data.id
                 }
             });
-
-
-            // this.$router.push({name: 'comment.edit', params: {id: 'new'}});
         },
         del(v){
             this['commentIndex/fetchDel']({
                 url: this.url['model'],
-                // key: v.node.key,
                 id: v.node.data.id
             });
         },
@@ -131,7 +92,6 @@ export default {
             this.$router.push({name: 'comment.edit', params: {id: v.node.data.id}});
         },
         expandNode(node) {
-            console.log('expandNode', node)
             if (node.children && node.children.length) {
                 this.expandedKeys[node.key] = true;
 
